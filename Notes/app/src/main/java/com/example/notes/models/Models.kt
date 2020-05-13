@@ -1,6 +1,6 @@
 package com.example.notes.models
 
-data class Tasks(
+data class Task(
     var title: String,
     val todos: MutableList<Todo> = mutableListOf(),
     var tag: Tag? = null
@@ -8,7 +8,7 @@ data class Tasks(
 
 data class Todo(
     var description: String,
-    var isComplete: String
+    var isComplete: Boolean = false
 )
 
 data class Note(

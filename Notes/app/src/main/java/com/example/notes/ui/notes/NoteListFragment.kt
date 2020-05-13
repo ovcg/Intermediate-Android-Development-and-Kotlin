@@ -29,7 +29,10 @@ class NoteListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val mAdapter = NoteAdapter(
             mutableListOf(
-                Note("Note description")
+                Note("Note 1"),
+                Note("Note 2"),
+                Note("Note 3"),
+                Note("Note 4")
             )
         )
         with(recyclerView){

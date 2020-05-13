@@ -5,13 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notes.R
+import com.example.notes.foundations.BaseRecyclerViewAdapter
 import com.example.notes.models.Note
-import com.example.notes.models.Tasks
 import kotlinx.android.synthetic.main.item_task.view.*
 
 class NoteAdapter(
-    private val noteList: MutableList<Note> = mutableListOf()
-) : RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
+    noteList: MutableList<Note> = mutableListOf()
+) : BaseRecyclerViewAdapter<Note>(noteList) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -19,16 +19,11 @@ class NoteAdapter(
         )
     }
 
-    override fun getItemCount(): Int = noteList.size
+    class ViewHolder(val view: View) : BaseViewHolder<Note>(view) {
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.onBind(noteList[position])
-    }
-
-    class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-
-        fun onBind(note: Note){
-            view.titleView.text = note.description
+        override fun onBind(model: Note) {
+            view.titleView.text = model.description
         }
+
     }
 }

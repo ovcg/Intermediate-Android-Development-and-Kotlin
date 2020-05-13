@@ -8,7 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notes.R
-import com.example.notes.models.Tasks
+import com.example.notes.models.Task
+import com.example.notes.models.Todo
 import kotlinx.android.synthetic.main.fragment_tasks.*
 
 class TaskListFragment : Fragment() {
@@ -29,8 +30,11 @@ class TaskListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val mAdapter = TasksAdapter(
             mutableListOf(
-                Tasks("Task One"),
-                Tasks("Task Two")
+                Task("Task One", mutableListOf(
+                    Todo("Test One", true),
+                    Todo("Test Two")
+                )),
+                Task("Task Two")
             )
         )
         with(recyclerView){

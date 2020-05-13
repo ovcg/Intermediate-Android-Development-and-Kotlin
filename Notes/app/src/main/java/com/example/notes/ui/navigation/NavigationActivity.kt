@@ -9,7 +9,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.notes.R
 import com.example.notes.models.Tag
-import com.example.notes.models.Tasks
+import com.example.notes.models.Task
 
 class NavigationActivity : AppCompatActivity() {
 
@@ -34,7 +34,7 @@ class NavigationActivity : AppCompatActivity() {
             "High priority",
             R.color.colorAccent
         )
-        val task = Tasks("Get grocery", tag = tag)
+        val task = Task("Get grocery", tag = tag)
 
     }
 }

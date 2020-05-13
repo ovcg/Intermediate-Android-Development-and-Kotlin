@@ -1,16 +1,18 @@
 package com.example.notes.ui.tasks
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import com.example.notes.R
-import com.example.notes.models.Tasks
+import com.example.notes.foundations.BaseRecyclerViewAdapter
+import com.example.notes.models.Task
 import kotlinx.android.synthetic.main.item_task.view.*
+import kotlinx.android.synthetic.main.view_todo.view.*
 
 class TasksAdapter(
-    private val taskList: MutableList<Tasks> = mutableListOf()
-) : RecyclerView.Adapter<TasksAdapter.ViewHolder>() {
+    taskList: MutableList<Task> = mutableListOf()
+) : BaseRecyclerViewAdapter<Task>(taskList) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -18,16 +20,29 @@ class TasksAdapter(
         )
     }
 
-    override fun getItemCount(): Int = taskList.size
+    class ViewHolder(private val view: View) : BaseViewHolder<Task>(view) {
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.onBind(taskList[position])
-    }
+        override fun onBind(model: Task) {
+            view.titleView.text = model.title
+            model.todos.forEach { todo ->
 
-    class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+                val todoView = LayoutInflater.from(view.context)
+                    .inflate(R.layout.view_todo, view.todoContainer, false).apply {
+                        descriptionView.text = todo.description
 
-        fun onBind(task: Tasks){
-            view.titleView.text = task.title
+                        completeCheckBox.isChecked = todo.isComplete
+
+                        completeCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
+                            descriptionView.paintFlags =  if (isChecked){
+                                descriptionView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                            }else{
+                                descriptionView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                            }
+                        }
+                    }
+                view.todoContainer.addView(todoView)
+
+            }
         }
     }
 }
