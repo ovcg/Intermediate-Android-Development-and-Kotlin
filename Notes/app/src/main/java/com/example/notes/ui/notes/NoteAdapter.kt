@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.notes.R
 import com.example.notes.foundations.BaseRecyclerViewAdapter
 import com.example.notes.models.Note
+import com.example.notes.ui.views.NoteView
 import kotlinx.android.synthetic.main.item_task.view.*
 
 class NoteAdapter(
@@ -15,15 +16,16 @@ class NoteAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_task, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_note, parent, false)
         )
     }
 
-    class ViewHolder(val view: View) : BaseViewHolder<Note>(view) {
+    class ViewHolder(private val view: View) : BaseViewHolder<Note>(view) {
 
         override fun onBind(model: Note) {
-            view.titleView.text = model.description
+            (view as NoteView).apply {
+                initView(model)
+            }
         }
-
     }
 }
