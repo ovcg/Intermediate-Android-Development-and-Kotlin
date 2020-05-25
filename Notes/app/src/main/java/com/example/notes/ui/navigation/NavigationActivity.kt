@@ -1,5 +1,6 @@
 package com.example.notes.ui.navigation
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -8,10 +9,11 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.notes.R
-import com.example.notes.models.Tag
-import com.example.notes.models.Task
+import com.example.notes.foundations.BaseFragment
+import com.example.notes.ui.create.CreateActivity
+import com.example.notes.ui.tasks.TaskListFragment
 
-class NavigationActivity : AppCompatActivity() {
+class NavigationActivity : AppCompatActivity(), BaseFragment.TouchActionDelegate {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,11 +32,21 @@ class NavigationActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        val tag = Tag(
-            "High priority",
-            R.color.colorAccent
-        )
-        val task = Task("Get grocery", tag = tag)
+    }
 
+    private fun goToCreateActivity(fragmentValue: String){
+        startActivity(Intent(this, CreateActivity::class.java).apply {
+            putExtra(fragmentValueKey, fragmentValue)
+        })
+    }
+
+    override fun onAddButtonClicked(value: String) {
+        goToCreateActivity(value)
+    }
+
+    companion object{
+        const val fragmentValueKey = "fvk"
+        const val fragmentValueNote = "fvn"
+        const val fragmentValueTask = "fvt"
     }
 }

@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_notes"
-        android:name="com.example.notes.ui.notes.NoteListFragment"
+        android:name="com.example.notes.ui.notes.NotesListFragment"
         android:label="@string/title_notes"
         tools:layout="@layout/fragment_notes" />
 
