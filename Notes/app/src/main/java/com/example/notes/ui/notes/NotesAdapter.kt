@@ -10,12 +10,12 @@ import com.example.notes.foundations.BaseRecyclerViewAdapter
 import com.example.notes.models.Note
 import com.example.notes.ui.navigation.NavigationActivity
 import com.example.notes.ui.views.NoteView
-import kotlinx.android.synthetic.main.item_task.view.*
 import kotlinx.android.synthetic.main.view_add_button.view.*
 
 class NotesAdapter(
-    noteList: MutableList<Note> = mutableListOf(),
-    private val touchActionDelegate: BaseFragment.TouchActionDelegate
+    private val noteList: MutableList<Note> = mutableListOf(),
+    private val touchActionDelegate: BaseFragment.TouchActionDelegate,
+    private val dataActionDelegate: NotesListViewContract
 ) : BaseRecyclerViewAdapter<Note>(noteList) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
@@ -23,7 +23,7 @@ class NotesAdapter(
             ViewHolder(
                 LayoutInflater.from(parent.context).inflate(R.layout.item_note, parent, false)
             )
-        }else{
+        } else {
             AddButtonViewHolder(
                 LayoutInflater.from(parent.context).inflate(R.layout.view_add_button, parent, false)
             )
@@ -32,7 +32,7 @@ class NotesAdapter(
 
     class ViewHolder(private val view: View) : BaseViewHolder<Note>(view) {
 
-        override fun onBind(model: Note) {
+        override fun onBind(model: Note, listIndex: Int) {
             (view as NoteView).apply {
                 initView(model)
             }
@@ -41,10 +41,10 @@ class NotesAdapter(
 
     inner class AddButtonViewHolder(private val view: View) :
         BaseRecyclerViewAdapter.AddButtonViewHolder(view) {
-        override fun onBind(model: Unit) {
+        override fun onBind(model: Unit, listIndex: Int) {
             view.buttonText.text = view.context.getString(R.string.add_button_note)
 
-            view.setOnClickListener{
+            view.setOnClickListener {
                 touchActionDelegate.onAddButtonClicked(NavigationActivity.fragmentValueNote)
             }
         }

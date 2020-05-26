@@ -8,4 +8,5 @@
     <string name="title_notes">Notes</string>
     <string name="add_button_task">Add New Task</string>
     <string name="add_button_note">Add New Note</string>
+    <string name="title_create">Create Activity</string>
 </resources>

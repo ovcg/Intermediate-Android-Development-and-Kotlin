@@ -13,10 +13,10 @@ class CreateActivity : AppCompatActivity() {
         setContentView(R.layout.activity_create)
 
         intent.getStringExtra(NavigationActivity.fragmentValueKey).run {
-            textView.text = if (this == NavigationActivity.fragmentValueNote){
+            textView.text = if (this == NavigationActivity.fragmentValueTask){
                 "this is a task"
             }
-            else if(this == NavigationActivity.fragmentValueTask){
+            else if(this == NavigationActivity.fragmentValueNote){
                 "this is a note"
             }else{
                 "something went wrong"

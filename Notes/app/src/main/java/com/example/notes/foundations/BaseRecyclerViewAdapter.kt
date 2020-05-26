@@ -2,10 +2,9 @@ package com.example.notes.foundations
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.example.notes.ui.tasks.TasksAdapter
 
 abstract class BaseRecyclerViewAdapter<T>(
-    protected val masterList: MutableList<T> = mutableListOf()
+    private val masterList: MutableList<T> = mutableListOf()
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -13,6 +12,12 @@ abstract class BaseRecyclerViewAdapter<T>(
         const val typeAddButton = 0
         const val typeInfo = 1
 
+    }
+
+    fun updateList(list: MutableList<T>){
+        masterList.clear()
+        masterList.addAll(list)
+        notifyDataSetChanged()
     }
 
     override fun getItemViewType(position: Int): Int = if (position == 0) {
@@ -25,14 +30,14 @@ abstract class BaseRecyclerViewAdapter<T>(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is AddButtonViewHolder) {
-            holder.onBind(Unit)
+            holder.onBind(Unit, position - 1)
         } else {
-            (holder as BaseViewHolder<T>).onBind(masterList[position - 1])
+            (holder as BaseViewHolder<T>).onBind(masterList[position - 1], position - 1)
         }
     }
 
     abstract class BaseViewHolder<T>(private val view: View) : RecyclerView.ViewHolder(view) {
-        abstract fun onBind(model: T)
+        abstract fun onBind(model: T, listIndex: Int)
     }
 
     abstract class AddButtonViewHolder(view: View): BaseViewHolder<Unit>(view)
