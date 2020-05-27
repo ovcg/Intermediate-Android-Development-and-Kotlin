@@ -32,7 +32,7 @@ class TaskListFragment : BaseFragment() {
 
     }
 
-    private fun setContentView(){
+    private fun setContentView() {
         contentView.initView(touchActionDelegate, taskViewModel)
     }
 

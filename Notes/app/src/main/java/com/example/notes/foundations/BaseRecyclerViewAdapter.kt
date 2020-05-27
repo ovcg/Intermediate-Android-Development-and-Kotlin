@@ -14,10 +14,12 @@ abstract class BaseRecyclerViewAdapter<T>(
 
     }
 
-    fun updateList(list: MutableList<T>){
+    fun updateList(list: MutableList<T>) {
+        //val result = DiffUtil.calculateDiff(DiffUtilCallBackImpl(masterList, list))
         masterList.clear()
         masterList.addAll(list)
         notifyDataSetChanged()
+        //result.dispatchUpdatesTo(this)
     }
 
     override fun getItemViewType(position: Int): Int = if (position == 0) {
@@ -40,5 +42,18 @@ abstract class BaseRecyclerViewAdapter<T>(
         abstract fun onBind(model: T, listIndex: Int)
     }
 
-    abstract class AddButtonViewHolder(view: View): BaseViewHolder<Unit>(view)
+    abstract class AddButtonViewHolder(view: View) : BaseViewHolder<Unit>(view)
+
+    /*class DiffUtilCallBackImpl<T>(private val oldList: List<T>, private val newList: List<T>) : DiffUtil.Callback(){
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+            oldList[oldItemPosition] == newList[newItemPosition]
+
+        override fun getOldListSize(): Int = oldList.size
+
+        override fun getNewListSize(): Int = newList.size
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+             oldList[oldItemPosition] == newList[newItemPosition]
+    }*/
 }

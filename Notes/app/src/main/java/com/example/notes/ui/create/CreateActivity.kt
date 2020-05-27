@@ -1,7 +1,7 @@
 package com.example.notes.ui.create
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.notes.R
 import com.example.notes.ui.navigation.NavigationActivity
 import kotlinx.android.synthetic.main.activity_create.*
@@ -13,12 +13,11 @@ class CreateActivity : AppCompatActivity() {
         setContentView(R.layout.activity_create)
 
         intent.getStringExtra(NavigationActivity.fragmentValueKey).run {
-            textView.text = if (this == NavigationActivity.fragmentValueTask){
+            textView.text = if (this == NavigationActivity.fragmentValueTask) {
                 "this is a task"
-            }
-            else if(this == NavigationActivity.fragmentValueNote){
+            } else if (this == NavigationActivity.fragmentValueNote) {
                 "this is a note"
-            }else{
+            } else {
                 "something went wrong"
             }
         }

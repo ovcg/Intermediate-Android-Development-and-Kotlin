@@ -11,26 +11,31 @@ import kotlinx.android.synthetic.main.fragment_tasks.view.*
 class TaskListView @JvmOverloads constructor(
     ctx: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 1) : ConstraintLayout( ctx, attrs, defStyleAttr)  {
+    defStyleAttr: Int = 1
+) : ConstraintLayout(ctx, attrs, defStyleAttr) {
 
     private lateinit var mAdapter: TasksAdapter
     private lateinit var touchActionDelegate: BaseFragment.TouchActionDelegate
     private lateinit var dataActionDelegate: TaskListViewContract
 
-    fun initView(taDelegate: BaseFragment.TouchActionDelegate, daDelegate: TaskListViewContract){
+    fun initView(taDelegate: BaseFragment.TouchActionDelegate, daDelegate: TaskListViewContract) {
         setDelegate(taDelegate, daDelegate)
         setUpView()
     }
 
-    private fun setDelegate(taDelegate: BaseFragment.TouchActionDelegate, daDelegate: TaskListViewContract){
+    private fun setDelegate(
+        taDelegate: BaseFragment.TouchActionDelegate,
+        daDelegate: TaskListViewContract
+    ) {
         touchActionDelegate = taDelegate
         dataActionDelegate = daDelegate
     }
 
-    private fun setUpView(){
+    private fun setUpView() {
         mAdapter = TasksAdapter(
-            touchActionDelegate =  touchActionDelegate,
-            dataActionDelegate = dataActionDelegate)
+            touchActionDelegate = touchActionDelegate,
+            dataActionDelegate = dataActionDelegate
+        )
 
         with(recyclerView) {
             layoutManager = LinearLayoutManager(context)
@@ -39,7 +44,7 @@ class TaskListView @JvmOverloads constructor(
 
     }
 
-    fun updateList(list: MutableList<Task>){
+    fun updateList(list: MutableList<Task>) {
         mAdapter.updateList(list)
     }
 }

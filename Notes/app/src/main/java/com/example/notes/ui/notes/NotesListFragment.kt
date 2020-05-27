@@ -32,7 +32,7 @@ class NotesListFragment : BaseFragment() {
 
     }
 
-    private fun setContentView(){
+    private fun setContentView() {
         contentView.initView(touchActionDelegate, notesViewModel)
     }
 

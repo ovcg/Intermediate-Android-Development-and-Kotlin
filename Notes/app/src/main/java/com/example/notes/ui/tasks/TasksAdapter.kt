@@ -32,7 +32,7 @@ class TasksAdapter(
 
     inner class TaskViewHolder(private val view: View) : BaseViewHolder<Task>(view) {
         override fun onBind(model: Task, listIndex: Int) {
-            (view as TaskView).initView(model){ todoIndex, isChecked ->
+            (view as TaskView).initView(model) { todoIndex, isChecked ->
 
                 dataActionDelegate.onTodoUpdated(listIndex, todoIndex, isChecked)
             }

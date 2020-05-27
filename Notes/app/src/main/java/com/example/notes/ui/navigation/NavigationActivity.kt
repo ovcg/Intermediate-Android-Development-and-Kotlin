@@ -2,7 +2,6 @@ package com.example.notes.ui.navigation
 
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -11,7 +10,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.notes.R
 import com.example.notes.foundations.BaseFragment
 import com.example.notes.ui.create.CreateActivity
-import com.example.notes.ui.tasks.TaskListFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class NavigationActivity : AppCompatActivity(), BaseFragment.TouchActionDelegate {
 
@@ -34,7 +33,7 @@ class NavigationActivity : AppCompatActivity(), BaseFragment.TouchActionDelegate
 
     }
 
-    private fun goToCreateActivity(fragmentValue: String){
+    private fun goToCreateActivity(fragmentValue: String) {
         startActivity(Intent(this, CreateActivity::class.java).apply {
             putExtra(fragmentValueKey, fragmentValue)
         })
@@ -44,7 +43,7 @@ class NavigationActivity : AppCompatActivity(), BaseFragment.TouchActionDelegate
         goToCreateActivity(value)
     }
 
-    companion object{
+    companion object {
         const val fragmentValueKey = "fvk"
         const val fragmentValueNote = "fvn"
         const val fragmentValueTask = "fvt"
