@@ -3,6 +3,7 @@ package com.example.notes.ui.tasks
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.notes.foundations.ApplicationScope
 import com.example.notes.models.Task
 import toothpick.Toothpick
 import toothpick.config.Module
@@ -17,14 +18,7 @@ class TasksViewModel : ViewModel(), TaskListViewContract {
     val taskListLiveData: LiveData<MutableList<Task>> = _taskListLiveData
 
     init {
-
-        val scope = Toothpick.openScope(this)
-        scope.installModules(object : Module(){
-            init {
-                bind(ITaskModel::class.java).toInstance(TaskLocalModel())
-            }
-        })
-        Toothpick.inject(this, scope)
+        Toothpick.inject(this, ApplicationScope.scope)
         _taskListLiveData.postValue(taskModel.retrieve().toMutableList())
 
     }

@@ -11,7 +11,7 @@ import com.example.notes.foundations.BaseFragment
 
 class NotesListFragment : BaseFragment() {
 
-    private lateinit var notesViewModel: NotesViewModel
+    private lateinit var notesViewModel: NoteViewModel
     private lateinit var contentView: NotesListView
 
     override fun onCreateView(
@@ -38,7 +38,7 @@ class NotesListFragment : BaseFragment() {
 
     private fun bindViewModel() {
         notesViewModel =
-            ViewModelProvider(this).get(NotesViewModel::class.java)
+            ViewModelProvider(this).get(NoteViewModel::class.java)
         notesViewModel.notesListLiveData.observe(viewLifecycleOwner, Observer {
             contentView.updateList(it)
         })
