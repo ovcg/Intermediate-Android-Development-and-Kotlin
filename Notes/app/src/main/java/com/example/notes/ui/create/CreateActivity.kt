@@ -7,9 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.notes.R
 import com.example.notes.ui.navigation.NavigationActivity
-import kotlinx.android.synthetic.main.activity_create.*
 
-class CreateActivity : AppCompatActivity() {
+class CreateActivity : AppCompatActivity(), CreateTaskFragment.OnFragmentInteractorListener,
+    CreateNoteFragment.OnFragmentInteractorListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +33,7 @@ class CreateActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        when(item.itemId){
+        when (item.itemId) {
             R.id.saveItem -> {
 
             }
@@ -41,10 +41,14 @@ class CreateActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun createFragment(fragment: Fragment){
+    private fun createFragment(fragment: Fragment) {
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.fragmentHolder, fragment)
             .commit()
+    }
+
+    override fun onFragmentInteraction() {
+
     }
 }
