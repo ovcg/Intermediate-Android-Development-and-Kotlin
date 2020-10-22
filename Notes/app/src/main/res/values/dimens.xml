@@ -5,7 +5,7 @@
 
     <dimen name="image_icon_default">32dp</dimen>
 
-    <dimen name="simple_item_height">128dp</dimen>
+    <dimen name="simple_item_height">150dp</dimen>
     <dimen name="item_margin">16dp</dimen>
     <dimen name="item_margin_small">8dp</dimen>
     <dimen name="elevation_default">2dp</dimen>

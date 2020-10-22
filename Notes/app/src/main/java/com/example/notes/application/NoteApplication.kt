@@ -4,7 +4,7 @@ import android.app.Application
 
 class NoteApplication : Application() {
 
-    companion object{
+    companion object {
         lateinit var instance: NoteApplication
     }
 

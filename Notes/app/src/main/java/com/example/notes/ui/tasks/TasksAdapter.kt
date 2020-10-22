@@ -10,6 +10,7 @@ import com.example.notes.foundations.BaseRecyclerViewAdapter
 import com.example.notes.models.Task
 import com.example.notes.ui.navigation.NavigationActivity
 import com.example.notes.ui.views.TaskView
+import kotlinx.android.synthetic.main.item_task.view.*
 import kotlinx.android.synthetic.main.view_add_button.view.*
 
 class TasksAdapter(
@@ -32,7 +33,7 @@ class TasksAdapter(
 
     inner class TaskViewHolder(private val view: View) : BaseViewHolder<Task>(view) {
         override fun onBind(model: Task, listIndex: Int) {
-            (view as TaskView).initView(model) { todoIndex, isChecked ->
+            (view.taskView as TaskView).initView(model) { todoIndex, isChecked ->
 
                 dataActionDelegate.onTodoUpdated(listIndex, todoIndex, isChecked)
             }

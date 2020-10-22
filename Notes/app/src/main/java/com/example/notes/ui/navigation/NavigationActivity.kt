@@ -11,12 +11,14 @@ import com.example.notes.R
 import com.example.notes.foundations.BaseFragment
 import com.example.notes.ui.create.CreateActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import io.paperdb.Paper
 
 class NavigationActivity : AppCompatActivity(), BaseFragment.TouchActionDelegate {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation)
+        Paper.init(this)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         val navController = findNavController(R.id.nav_host_fragment)

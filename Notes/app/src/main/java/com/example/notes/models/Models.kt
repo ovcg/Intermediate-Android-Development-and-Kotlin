@@ -6,33 +6,41 @@ import java.util.*
 
 class Task @JvmOverloads constructor(
     title: String,
+    @Relation(
+        parentColumn = "uid",
+        entityColumn = "taskId",
+        entity = Todo::class
+
+    )
     val todos: MutableList<Todo> = mutableListOf(),
     tag: Tag? = null
 ): TaskEntity(title = title, tag = tag){
-
+    init {
+        todos.forEach {
+            it.taskId = uid
+        }
+    }
 }
-
 @Entity(tableName = "tasks")
 open class TaskEntity(
     @PrimaryKey
-    val uid: Long = UUID.randomUUID().leastSignificantBits,
+    var uid: Long = UUID.randomUUID().leastSignificantBits,
     @ColumnInfo
     var title: String,
     @Embedded
     var tag: Tag? = null
 )
-
 @Entity(tableName = "todos")
 data class Todo(
     @PrimaryKey(autoGenerate = true)
     var uid: Int = 0,
     @ForeignKey(
         parentColumns = ["uid"],
-        childColumns = ["taskKey"],
+        childColumns = ["taskId"],
         entity = TaskEntity::class,
         onDelete = CASCADE
     )
-    var taskKey: Long? = null,
+    var taskId: Long? = null,
     @ColumnInfo
     var description: String,
     @ColumnInfo

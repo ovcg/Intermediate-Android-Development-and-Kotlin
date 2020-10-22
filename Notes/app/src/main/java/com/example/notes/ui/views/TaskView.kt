@@ -21,6 +21,8 @@ class TaskView @JvmOverloads constructor(
 
         titleView.text = task.title
 
+        todoContainer.removeAllViews()
+
         task.todos.forEachIndexed { todoIndex, todo ->
 
             val todoView = (LayoutInflater.from(context)

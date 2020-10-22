@@ -32,6 +32,11 @@ class NotesListFragment : BaseFragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        notesViewModel.loadData()
+    }
+
     private fun setContentView() {
         contentView.initView(touchActionDelegate, notesViewModel)
     }

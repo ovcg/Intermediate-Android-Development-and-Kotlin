@@ -1,6 +1,7 @@
 package com.example.notes.ui.tasks
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.notes.R
 import com.example.notes.foundations.BaseFragment
+import com.example.notes.models.Task
+import io.paperdb.Paper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class TaskListFragment : BaseFragment() {
 
@@ -29,6 +36,12 @@ class TaskListFragment : BaseFragment() {
 
         bindViewModel()
         setContentView()
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        taskViewModel.loadData()
 
     }
 
